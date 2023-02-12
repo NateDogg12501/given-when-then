@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,129 +21,75 @@ import gwt.dto.request.ItemRequestDto;
 import gwt.dto.request.OrderRequestDto;
 import gwt.dto.response.ItemResponseDto;
 import gwt.dto.response.OrderResponseDto;
+import gwt.entity.Item;
+import gwt.entity.Order;
+import gwt.exception.NoItemExists;
+import gwt.service.OrderService;
 
 @RestController
 @RequestMapping("/order")
 public class OrderController {
 
+	private OrderService orderService;
+	
+	@Autowired
+	public OrderController(OrderService orderService) {
+		this.orderService = orderService;
+	}
+	
 	@GetMapping
 	public ResponseEntity<List<OrderResponseDto>> getOrders() {
 		List<OrderResponseDto> orders = new ArrayList<>();
 		
-		orders.add(
-			OrderResponseDto.builder()
-				.id(1L)
-				.items(
-					Arrays.asList(
-						ItemResponseDto.builder()
-							.id(1L)
-							.description("First Item")
-							.price(new BigDecimal("1.00"))
-						  .build(),
-						ItemResponseDto.builder()
-							.id(2L)
-							.description("Second Item")
-							.price(new BigDecimal("2.00"))
-						  .build(),
-						ItemResponseDto.builder()
-							.id(3L)
-							.description("Third Item")
-							.price(new BigDecimal("3.00"))
-						  .build()
-					)
-				)
-				.totalPrice(new BigDecimal("6.00"))
-			  .build()
-			);
-
-		orders.add(
-			OrderResponseDto.builder()
-				.id(2L)
-				.items(
-					Arrays.asList(
-						ItemResponseDto.builder()
-							.id(1L)
-							.description("First Item")
-							.price(new BigDecimal("1.00"))
-						  .build(),
-						ItemResponseDto.builder()
-							.id(2L)
-							.description("Second Item")
-							.price(new BigDecimal("2.00"))
-						  .build()
-					)
-				)
-				.totalPrice(new BigDecimal("3.00"))
-			  .build()
-			);
+		for (Order order : orderService.getOrders()) {
+			orders.add(mapEntityToDto(order));
+		}
 		
 		return ResponseEntity.ok(orders);
 	}
 	
 	@GetMapping("{orderId}")
 	public ResponseEntity<OrderResponseDto> getOrder(@PathVariable Long orderId) {
-		if (orderId != 1L) {
+		Optional<Order> order = orderService.getOrder(orderId);
+		
+		if (order.isEmpty()) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 		}
 		
-		OrderResponseDto order =	OrderResponseDto.builder()
-			.id(1L)
-			.items(
-				Arrays.asList(
-					ItemResponseDto.builder()
-						.id(1L)
-						.description("First Item")
-						.price(new BigDecimal("1.00"))
-					  .build(),
-					ItemResponseDto.builder()
-						.id(2L)
-						.description("Second Item")
-						.price(new BigDecimal("2.00"))
-					  .build(),
-					ItemResponseDto.builder()
-						.id(3L)
-						.description("Third Item")
-						.price(new BigDecimal("3.00"))
-					  .build()
-				)
-			)
-			.totalPrice(new BigDecimal("6.00"))
-		  .build();
-		
-		return ResponseEntity.ok(order);
+		return ResponseEntity.ok(mapEntityToDto(order.get()));
 	}
 	
 	@PostMapping
 	public ResponseEntity<OrderResponseDto> createOrder(@RequestBody OrderRequestDto orderRequestDto) {
-		if (orderRequestDto.getItems().isEmpty()) {
+		if (orderRequestDto.getItemSkus().isEmpty()) {
 			return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(null);
 		}
 		
-		ItemRequestDto item = orderRequestDto.getItems().get(0);
-		
-		if (item.getId() != 1L) {
+		try {
+			Order newOrder = orderService.createOrder(orderRequestDto.getItemSkus());
+			return ResponseEntity.status(HttpStatus.CREATED).body(mapEntityToDto(newOrder));
+		} catch (NoItemExists nie) {
 			return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(null);
 		}
+	}
+
+	private OrderResponseDto mapEntityToDto(Order order) {
+		OrderResponseDto dto = new OrderResponseDto();
 		
-		if (item.getPrice().compareTo(BigDecimal.ZERO) <= 0) {
-			return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(null);
+		dto.setId(order.getId());
+		dto.setTotalPrice(order.getTotalPrice());
+		dto.setItems(new ArrayList<>());
+		for (Item item : order.getItems()) {
+			dto.getItems().add(
+				ItemResponseDto.builder()
+					.sku(item.getSku())
+					.description(item.getDescription())
+					.price(item.getPrice())
+				  .build()
+			);
 		}
 		
-		OrderResponseDto order = OrderResponseDto.builder()
-			.id(1L)
-			.items(
-				Collections.singletonList(
-					ItemResponseDto.builder()
-						.id(1L)
-						.description("First Item")
-						.price(new BigDecimal("1.00"))
-					  .build()
-				)
-			)
-			.totalPrice(new BigDecimal("1.00"))
-		  .build();
-		
-		return ResponseEntity.status(HttpStatus.CREATED).body(order);
+		return dto;
 	}
 	
 }

@@ -9,13 +9,13 @@ Testing framework to easily chain given-when-then test cases
 ### To-Do
 - [ ] App structure
     - [ ] Controllers
-        - [ ] Order
+        - [x] Order
             - [x] getOrders
             - [x] getOrder/{id}
             - [x] createOrder
         - [ ] Item
             - [ ] getItems
-            - [ ] getItem/{id}
+            - [ ] getItem/{sku}
             - [ ] createItem
     - [ ] Persistence
     - [ ] Entities
@@ -28,15 +28,16 @@ Testing framework to easily chain given-when-then test cases
         - [x] get order with valid id
         - [x] get order with invalid id
         - [x] create order happy path
-        - [x] create order with invalid item id
-        - [x] create order with invalid item price
+        - [x] create order with invalid item sku
         - [x] create order with no items
     - [ ] Items
         - [ ] get all items
-        - [ ] get item with valid id
-        - [ ] get item with invalid id
+        - [ ] get item with valid sku
+        - [ ] get item with invalid sku
         - [ ] create item happy path
         - [ ] create item with negative price
-        - [ ] create item with duplicate id
-- [ ] Smoke Tests        
+        - [ ] create item with negative sku
+        - [ ] create item with duplicate sku
+- [ ] Smoke Tests  
+- [ ] Contract Tests      
     

@@ -85,14 +85,8 @@ public class OrderControllerTest extends BaseTest {
 		WebClient client = WebClient.create("http://localhost:" + port);
 
 		OrderRequestDto request = OrderRequestDto.builder()
-									.items(
-										Collections.singletonList(
-											ItemRequestDto.builder()
-												.id(1L)
-												.description("First Item")
-												.price(new BigDecimal("1.00"))
-											  .build()
-										)
+									.itemSkus(
+										Collections.singletonList(1L)
 									)
 									.build();
 		ResponseEntity<OrderResponseDto> response = client.post().uri("/order").bodyValue(request).retrieve().toEntity(OrderResponseDto.class).block();
@@ -111,44 +105,14 @@ public class OrderControllerTest extends BaseTest {
 	}
 	
 	@Test
-	void createOrder_invalidItemId() {
+	void createOrder_invalidItemSku() {
 		WebClient client = WebClient.create("http://localhost:" + port);
 
 		try {
 			OrderRequestDto request = OrderRequestDto.builder()
-					.items(
+					.itemSkus(
 							Collections.singletonList(
-								ItemRequestDto.builder()
-									.id(2L)
-									.description("First Item")
-									.price(new BigDecimal("1.00"))
-								  .build()
-							)
-						)
-						.build();
-			
-			ResponseEntity<OrderResponseDto> response = client.post().uri("/order").bodyValue(request).retrieve().toEntity(OrderResponseDto.class).block();
-			fail("Should have not gotten proper response");
-		} catch (WebClientResponseException exceptionResponse) {
-			assertEquals(422, exceptionResponse.getRawStatusCode());
-		}
-		
-		//TODO check repo
-	}
-	
-	@Test
-	void createOrder_badItemPrice() {
-		WebClient client = WebClient.create("http://localhost:" + port);
-
-		try {
-			OrderRequestDto request = OrderRequestDto.builder()
-					.items(
-							Collections.singletonList(
-								ItemRequestDto.builder()
-									.id(1L)
-									.description("First Item")
-									.price(new BigDecimal("-1.00"))
-								  .build()
+								2L
 							)
 						)
 						.build();
@@ -168,7 +132,7 @@ public class OrderControllerTest extends BaseTest {
 
 		try {
 			OrderRequestDto request = OrderRequestDto.builder()
-					.items(
+					.itemSkus(
 						Collections.emptyList()
 					)
 					.build();
@@ -182,8 +146,8 @@ public class OrderControllerTest extends BaseTest {
 		//TODO check repo
 	}
 	
-	private void assertItem(ItemResponseDto actual, long expectedId, String expectedDescription, BigDecimal expectedPrice) {
-		assertEquals(expectedId, actual.getId());
+	private void assertItem(ItemResponseDto actual, long expectedSku, String expectedDescription, BigDecimal expectedPrice) {
+		assertEquals(expectedSku, actual.getSku());
 		assertTrue(actual.getDescription().equals(expectedDescription));
 		assertTrue(actual.getPrice().compareTo(expectedPrice) == 0);
 	}

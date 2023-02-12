@@ -16,6 +16,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class OrderRequestDto {
 
-	private List<ItemRequestDto> items;
+	private List<Long> itemSkus;
 	
 }
