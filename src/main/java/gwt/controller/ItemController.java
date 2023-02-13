@@ -1,9 +1,6 @@
 package gwt.controller;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,15 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import gwt.dto.request.ItemRequestDto;
-import gwt.dto.request.OrderRequestDto;
 import gwt.dto.response.ItemResponseDto;
-import gwt.dto.response.OrderResponseDto;
 import gwt.entity.Item;
-import gwt.entity.Order;
 import gwt.exception.DuplicateSkuExists;
-import gwt.exception.NoItemExists;
 import gwt.service.ItemService;
-import gwt.service.OrderService;
 
 @RestController
 @RequestMapping("/item")

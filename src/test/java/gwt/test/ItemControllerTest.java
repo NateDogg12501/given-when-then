@@ -3,11 +3,10 @@ package gwt.test;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +22,11 @@ public class ItemControllerTest extends BaseTest {
 
 	@Autowired
 	private ItemRepo itemRepo;
+	
+	@AfterEach
+	void teardown() {
+		itemRepo.deleteAll();
+	}
 	
 	@Test
 	void getItems() {
@@ -104,7 +108,7 @@ public class ItemControllerTest extends BaseTest {
 		} catch (WebClientResponseException exceptionResponse) {
 			assertEquals(422, exceptionResponse.getRawStatusCode());
 		} finally {
-			assertItemDoesNotExistsRepo(1L);
+			assertItemDoesNotExistInRepo(1L);
 		}
 	}
 
@@ -125,7 +129,7 @@ public class ItemControllerTest extends BaseTest {
 		} catch (WebClientResponseException exceptionResponse) {
 			assertEquals(422, exceptionResponse.getRawStatusCode());
 		} finally {
-			assertItemDoesNotExistsRepo(1L);
+			assertItemDoesNotExistInRepo(1L);
 		}
 	}
 	
@@ -137,8 +141,8 @@ public class ItemControllerTest extends BaseTest {
 
 		ItemRequestDto request = ItemRequestDto.builder()
 				.sku(1L)
-				.description("First Item")
-				.price(new BigDecimal("1.00"))
+				.description("Updated Item")
+				.price(new BigDecimal("10.00"))
 				.build();
 
 		
@@ -146,9 +150,9 @@ public class ItemControllerTest extends BaseTest {
 			client.post().uri("/item").bodyValue(request).retrieve().toEntity(ItemResponseDto.class).block();
 			fail("Should have not gotten proper response");
 		} catch (WebClientResponseException exceptionResponse) {
-			assertEquals(422, exceptionResponse.getRawStatusCode());
+			assertEquals(409, exceptionResponse.getRawStatusCode());
 		} finally {
-			assertItemDoesNotExistsRepo(1L);
+			assertItemExistsInRepo(1L, "First Item", new BigDecimal("1.00"));
 		}
 	}	
 	
@@ -177,7 +181,7 @@ public class ItemControllerTest extends BaseTest {
 		assertTrue(potentialItem.get().getPrice().compareTo(expectedPrice) == 0);
 	}
 	
-	private void assertItemDoesNotExistsRepo(long sku) {
+	private void assertItemDoesNotExistInRepo(long sku) {
 		Optional<Item> potentialItem = itemRepo.findById(sku);
 		assertTrue(potentialItem.isEmpty());
 	}
