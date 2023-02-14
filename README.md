@@ -41,6 +41,9 @@ Testing framework to easily chain given-when-then test cases
         - [x] create item with negative sku
         - [x] create item with duplicate sku
 - [ ] Integration Tests
+	- [x] Items
+	- [ ] Orders
+	- [ ] Clean up messaging for assertEquals(...)
 - [ ] Smoke Tests  
 - [ ] Contract Tests      
     
