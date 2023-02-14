@@ -1,4 +1,4 @@
-package gwt.test;
+package gwt.test.base;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -7,36 +7,40 @@ Testing framework to easily chain given-when-then test cases
 - Item => An item that might be bought on an order from a store. 
 
 ### To-Do
-- [ ] App structure
-    - [ ] Controllers
-        - [ ] Order
+- [x] App structure
+    - [x] Controllers
+        - [x] Order
             - [x] getOrders
             - [x] getOrder/{id}
             - [x] createOrder
-        - [ ] Item
-            - [ ] getItems
-            - [ ] getItem/{id}
-            - [ ] createItem
-    - [ ] Persistence
-    - [ ] Entities
+        - [x] Item
+            - [x] getItems
+            - [x] getItem/{sku}
+            - [x] createItem
+    - [x] Persistence
+      - [x] Order
+      - [x] Item
+    - [x] Entities
         - [x] order
         - [x] Item
 - [ ] Unit Tests
-- [ ] Integration Tests
-    - [ ] Orders
+- [x] Base Tests
+    - [x] Orders
         - [x] get all orders
         - [x] get order with valid id
         - [x] get order with invalid id
         - [x] create order happy path
-        - [x] create order with invalid item id
-        - [x] create order with invalid item price
+        - [x] create order with invalid item sku
         - [x] create order with no items
-    - [ ] Items
-        - [ ] get all items
-        - [ ] get item with valid id
-        - [ ] get item with invalid id
-        - [ ] create item happy path
-        - [ ] create item with negative price
-        - [ ] create item with duplicate id
-- [ ] Smoke Tests        
+    - [x] Items
+        - [x] get all items
+        - [x] get item with valid sku
+        - [x] get item with invalid sku
+        - [x] create item happy path
+        - [x] create item with negative price
+        - [x] create item with negative sku
+        - [x] create item with duplicate sku
+- [ ] Integration Tests
+- [ ] Smoke Tests  
+- [ ] Contract Tests      
     
