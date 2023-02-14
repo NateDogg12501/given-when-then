@@ -1,7 +1,6 @@
 package gwt.service;
 
-import java.math.BigDecimal;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,16 +10,19 @@ import org.springframework.stereotype.Service;
 import gwt.entity.Item;
 import gwt.entity.Order;
 import gwt.exception.NoItemExists;
+import gwt.repo.ItemRepo;
 import gwt.repo.OrderRepo;
 
 @Service
 public class OrderService {
 
 	private OrderRepo orderRepo;
+	private ItemRepo itemRepo;
 	
 	@Autowired
-	public OrderService(OrderRepo orderRepo) {
+	public OrderService(OrderRepo orderRepo, ItemRepo itemRepo) {
 		this.orderRepo = orderRepo;
+		this.itemRepo = itemRepo;
 	}
 	
 	public List<Order> getOrders() {
@@ -32,23 +34,18 @@ public class OrderService {
 	}
 	
 	public Order createOrder(List<Long> itemSkus) {
-		Long itemSku = itemSkus.get(0);
+		List<Item> items = new ArrayList<>();
 		
-		if (itemSku != 1L) {
-			throw new NoItemExists("Item with ID [" + itemSku + "] does not exist");
+		for (Long itemSku : itemSkus) {
+			Optional<Item> item = itemRepo.findById(itemSku);
+			if (item.isEmpty()) {
+				throw new NoItemExists("Item with ID [" + itemSku + "] does not exist");
+			}
+			
+			items.add(item.get());
 		}
 			
-		Order order = Order.builder()
-			.items(
-				Collections.singletonList(
-					Item.builder()
-						.sku(1L)
-						.description("First Item")
-						.price(new BigDecimal("1.00"))
-					  .build()
-				)
-			)
-		  .build();
+		Order order = Order.builder().items(items).build();
 		
 		return orderRepo.save(order);
 	}

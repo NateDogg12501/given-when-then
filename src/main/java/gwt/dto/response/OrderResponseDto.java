@@ -18,11 +18,4 @@ public class OrderResponseDto {
 	private List<ItemResponseDto> items;
 	private BigDecimal totalPrice;	
 	
-	public BigDecimal getTotalPrice() {
-		return items.stream().map(m -> m.getPrice()).reduce(BigDecimal.ZERO, BigDecimal::add);
-	}
-	
-	
-	
-	
 }

@@ -1,4 +1,4 @@
-package gwt.test;
+package gwt.test.base;
 
 import static org.junit.jupiter.api.Assertions.*;
 

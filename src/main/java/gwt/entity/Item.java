@@ -1,9 +1,11 @@
 package gwt.entity;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -16,7 +18,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="item")
+@Table(name="items")
 public class Item {
 
 	@Id
@@ -24,4 +26,6 @@ public class Item {
 	private String description;
 	private BigDecimal price;
 	
+	@ManyToMany(mappedBy = "items")
+	private List<Order> orders;
 }
