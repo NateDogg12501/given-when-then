@@ -1,19 +1,8 @@
 package gwt.test.integration;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.math.BigDecimal;
-import java.util.List;
-import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.reactive.function.client.WebClient;
-import org.springframework.web.reactive.function.client.WebClientResponseException;
-
-import gwt.dto.request.ItemRequestDto;
-import gwt.dto.response.ItemResponseDto;
-import gwt.entity.Item;
 
 public class ItemControllerIntegrationTest extends BaseIntegrationTest {
 	

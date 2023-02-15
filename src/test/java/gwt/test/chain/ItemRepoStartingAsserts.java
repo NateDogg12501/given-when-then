@@ -37,27 +37,27 @@ public class ItemRepoStartingAsserts extends ThenAssertChain {
 		}
 		
 		public ItemRepoAsserts exists() {
-			assertTrue(potentialItem.isPresent());
+			assertTrue(potentialItem.isPresent(), "Item does not actually exist");
 			return this;
 		}
 		
 		public ItemRepoAsserts doesNotExist() {
-			assertTrue(potentialItem.isEmpty());
+			assertTrue(potentialItem.isEmpty(), "Item actually exists");
 			return this;
 		}
 		
 		public ItemRepoAsserts hasSku(Long expectedSku) {
-			assertEquals(expectedSku, potentialItem.get().getSku());
+			assertEquals(expectedSku, potentialItem.get().getSku(),  "Item SKU does not match");
 			return this;
 		}
 		
 		public ItemRepoAsserts hasDescription(String expectedDescription) {
-			assertTrue(expectedDescription.equals(potentialItem.get().getDescription()));
+			assertTrue(expectedDescription.equals(potentialItem.get().getDescription()), String.format("Actual description [%s] does not match expected description [%s]", potentialItem.get().getDescription(), expectedDescription));
 			return this;
 		}
 		
 		public ItemRepoAsserts hasPrice(BigDecimal expectedPrice) {
-			assertTrue(expectedPrice.compareTo(potentialItem.get().getPrice()) == 0);
+			assertTrue(expectedPrice.compareTo(potentialItem.get().getPrice()) == 0, String.format("Actual price [%s] does not match expected price [%s]", potentialItem.get().getPrice(), expectedPrice));
 			return this;
 		}
 		

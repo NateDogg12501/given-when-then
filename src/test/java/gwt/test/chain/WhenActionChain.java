@@ -1,12 +1,8 @@
 package gwt.test.chain;
 
-import java.util.List;
-
 import org.springframework.context.ApplicationContext;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
-
-import gwt.dto.response.ItemResponseDto;
 
 public class WhenActionChain extends BaseChain {
 

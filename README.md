@@ -43,7 +43,7 @@ Testing framework to easily chain given-when-then test cases
 - [ ] Integration Tests
 	- [x] Items
 	- [ ] Orders
-	- [ ] Clean up messaging for assertEquals(...)
+	- [x] Clean up messaging for assertEquals(...)
 - [ ] Smoke Tests  
 - [ ] Contract Tests      
     

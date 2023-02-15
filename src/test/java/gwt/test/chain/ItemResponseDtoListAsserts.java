@@ -10,7 +10,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.http.ResponseEntity;
 
 import gwt.dto.response.ItemResponseDto;
-import gwt.entity.Item;
 
 public class ItemResponseDtoListAsserts extends ThenAssertChain {
 
@@ -22,7 +21,7 @@ public class ItemResponseDtoListAsserts extends ThenAssertChain {
 	}
 	
 	public ItemResponseDtoListAsserts withListSize(int expectedSize) {
-		assertEquals(expectedSize, responseItemList.size());
+		assertEquals(expectedSize, responseItemList.size(), "ItemRespnseDtoListAsserts list size does not match");
 		return this;
 	}
 	
@@ -49,17 +48,17 @@ public class ItemResponseDtoListAsserts extends ThenAssertChain {
 		}
 		
 		public ItemResponseDtoListIndexAsserts hasSku(Long expectedSku) {
-			assertEquals(expectedSku, itemDto.getSku());
+			assertEquals(expectedSku, itemDto.getSku(), "Item SKU does not match");
 			return this;
 		}
 		
 		public ItemResponseDtoListIndexAsserts hasDescription(String expectedDescription) {
-			assertTrue(expectedDescription.equals(itemDto.getDescription()));
+			assertTrue(expectedDescription.equals(itemDto.getDescription()), String.format("Actual description [%s] does not match expected description [%s]", itemDto.getDescription(), expectedDescription));
 			return this;
 		}
 		
 		public ItemResponseDtoListIndexAsserts hasPrice(BigDecimal expectedPrice) {
-			assertTrue(expectedPrice.compareTo(itemDto.getPrice()) == 0);
+			assertTrue(expectedPrice.compareTo(itemDto.getPrice()) == 0, String.format("Actual price [%s] does not match expected price [%s]", itemDto.getPrice(), expectedPrice));
 			return this;
 		}
 	}

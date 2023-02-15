@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.http.ResponseEntity;
@@ -21,17 +20,17 @@ public class ItemResponseDtoAsserts extends ThenAssertChain {
 	}
 
 	public ItemResponseDtoAsserts hasSku(Long expectedSku) {
-		assertEquals(expectedSku, responseItem.getSku());
+		assertEquals(expectedSku, responseItem.getSku(), "Item SKU does not match");
 		return this;
 	}
 	
 	public ItemResponseDtoAsserts hasDescription(String expectedDescription) {
-		assertTrue(expectedDescription.equals(responseItem.getDescription()));
+		assertTrue(expectedDescription.equals(responseItem.getDescription()), String.format("Actual description [%s] does not match expected description [%s]", responseItem.getDescription(), expectedDescription));
 		return this;
 	}
 	
 	public ItemResponseDtoAsserts hasPrice(BigDecimal expectedPrice) {
-		assertTrue(expectedPrice.compareTo(responseItem.getPrice()) == 0);
+		assertTrue(expectedPrice.compareTo(responseItem.getPrice()) == 0, String.format("Actual price [%s] does not match expected price [%s]", responseItem.getPrice(), expectedPrice));
 		return this;
 	}
 	

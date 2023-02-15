@@ -1,7 +1,6 @@
 package gwt.test.chain;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.http.ResponseEntity;
