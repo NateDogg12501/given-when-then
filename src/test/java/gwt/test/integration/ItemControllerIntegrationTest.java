@@ -95,12 +95,13 @@ public class ItemControllerIntegrationTest extends BaseIntegrationTest {
 					.hasSku(1L)
 					.hasDescription("First Item")
 					.hasPrice(new BigDecimal("1.00"))
-			.item()
-				.withSku(1L)
-					.exists()
-					.hasSku(1L)
-					.hasDescription("First Item")
-					.hasPrice(new BigDecimal("1.00"))
+			.repository()
+				.item()
+					.withSku(1L)
+						.exists()
+						.hasSku(1L)
+						.hasDescription("First Item")
+						.hasPrice(new BigDecimal("1.00"))
 		;
 	}
 	
@@ -116,9 +117,10 @@ public class ItemControllerIntegrationTest extends BaseIntegrationTest {
 		.then()
 			.responseStatus()
 				.isUnprocessableEntity()
-			.item()
-				.withSku(1L)
-					.doesNotExist();
+			.repository()
+				.item()
+					.withSku(1L)
+						.doesNotExist();
 	}
 
 	@Test
@@ -133,9 +135,10 @@ public class ItemControllerIntegrationTest extends BaseIntegrationTest {
 		.then()
 			.responseStatus()
 				.isUnprocessableEntity()
-			.item()
-				.withSku(-1L)
-					.doesNotExist();
+			.repository()
+				.item()
+					.withSku(-1L)
+						.doesNotExist();
 	}
 	
 	@Test
@@ -153,11 +156,12 @@ public class ItemControllerIntegrationTest extends BaseIntegrationTest {
 		.then()
 			.responseStatus()
 				.isConflict()
-			.item()
-				.withSku(1L)
-					.exists()
-					.hasDescription("First Item")
-					.hasPrice(new BigDecimal("1.00"))
+			.repository()
+				.item()
+					.withSku(1L)
+						.exists()
+						.hasDescription("First Item")
+						.hasPrice(new BigDecimal("1.00"))
 		;
 	}	
 	

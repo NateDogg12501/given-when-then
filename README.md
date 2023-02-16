@@ -44,6 +44,7 @@ Testing framework to easily chain given-when-then test cases
 	- [x] Items
 	- [ ] Orders
 	- [x] Clean up messaging for assertEquals(...)
+	- [ ] Auto clean up repos/any resources given scenarios open should teardown themselves
 - [ ] Smoke Tests  
 - [ ] Contract Tests      
     

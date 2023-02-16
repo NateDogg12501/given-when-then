@@ -1,8 +1,6 @@
-package gwt.test.chain;
+package gwt.test.chain.given;
 
 import java.math.BigDecimal;
-
-import org.springframework.context.ApplicationContext;
 
 import gwt.entity.Item;
 import gwt.repo.ItemRepo;
@@ -13,8 +11,8 @@ public class ItemScenarios extends GivenScenarioChain {
 	
 	private Item.ItemBuilder itemBuilder;
 	
-	public ItemScenarios(ApplicationContext context) {
-		super(context);
+	public ItemScenarios() {
+		super();
 		itemRepo = this.getBean(ItemRepo.class);
 		itemBuilder = Item.builder();
 	}
@@ -35,7 +33,7 @@ public class ItemScenarios extends GivenScenarioChain {
 	}
 	
 	@Override
-	public GivenScenarioChain closeCurrentChain() {
+	protected GivenScenarioChain closeCurrentChain() {
 		itemRepo.save(itemBuilder.build());
 		return this;
 	}

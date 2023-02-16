@@ -9,7 +9,7 @@ import org.springframework.context.ApplicationContext;
 
 import gwt.repo.ItemRepo;
 import gwt.repo.OrderRepo;
-import gwt.test.chain.GivenScenarioChain;
+import gwt.test.chain.given.BasicGivenScenario;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class BaseIntegrationTest {
@@ -32,8 +32,8 @@ public class BaseIntegrationTest {
 		itemRepo.deleteAll();		
 	}
 	
-	protected GivenScenarioChain given() {
-		return new GivenScenarioChain(context);
+	protected BasicGivenScenario given() {
+		return new BasicGivenScenario(context);
 	}
 	
 }

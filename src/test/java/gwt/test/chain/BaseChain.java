@@ -2,16 +2,20 @@ package gwt.test.chain;
 
 import org.springframework.context.ApplicationContext;
 
-public class BaseChain {
+public abstract class BaseChain {
 
-	protected ApplicationContext context;
+	protected static ApplicationContext applicationContext;
 	
 	public BaseChain(ApplicationContext context) {
-		this.context = context;
+		applicationContext = context;
+	}
+	
+	protected BaseChain() {
+		
 	}
 	
 	protected <T> T getBean(Class<T> beanType) {
-		return context.getBean(beanType);
+		return applicationContext.getBean(beanType);
 	}
 	
 }
