@@ -24,27 +24,31 @@ import gwt.repo.ItemRepo;
 import gwt.repo.OrderRepo;
 
 public class OrderControllerIntegrationTest extends BaseIntegrationTest {
-
-	@Autowired
-	private ItemRepo itemRepo;
-	
-	@Autowired
-	private OrderRepo orderRepo;
-	
-	@AfterEach
-	void teardown() {
-		orderRepo.deleteAll();
-		itemRepo.deleteAll();
-	}
 	
 	@Test
 	void getOrders() {
-		Item item1 = createItem(1L, "First Item", new BigDecimal("1.00"));
-		Item item2 = createItem(2L, "Second Item", new BigDecimal("2.00"));
-		Item item3 = createItem(3L, "Third Item", new BigDecimal("3.00"));
 		
-		Order expectedOrder1 = createOrder(item1, item2, item3);
-		Order expectedOrder2 = createOrder(item1, item2);
+		given()
+			.existingItem()
+				.withSku(1L)
+				.withDescription("First Item")
+				.withPrice(new BigDecimal("1.00"))
+			.existingItem()
+				.withSku(2L)
+				.withDescription("Second Item")
+				.withPrice(new BigDecimal("2.00"))
+			.existingItem()
+				.withSku(3L)
+				.withDescription("Third Item")
+				.withPrice(new BigDecimal("3.00"))
+			.existingOrder()
+//				.withId(1L)
+				.withItemSkus(1L, 2L, 3L)
+			.existingOrder()
+//				.withId(2L)
+				.withItemSkus(1L, 2L)
+			.when();
+		
 		
 		WebClient client = WebClient.create("http://localhost:" + port);
 
@@ -57,7 +61,7 @@ public class OrderControllerIntegrationTest extends BaseIntegrationTest {
 		assertEquals(2, result.size());
 		
 		OrderResponseDto order1 = result.get(0);
-		assertEquals(expectedOrder1.getId(), order1.getId());
+		assertEquals(1L, order1.getId());
 		assertTrue(order1.getTotalPrice().compareTo(new BigDecimal("6.00")) == 0);
 		assertEquals(3, order1.getItems().size());
 		
@@ -66,7 +70,7 @@ public class OrderControllerIntegrationTest extends BaseIntegrationTest {
 		assertItem(order1.getItems().get(2), 3L, "Third Item", new BigDecimal("3.00"));
 		
 		OrderResponseDto order2 = result.get(1);
-		assertEquals(expectedOrder2.getId(), order2.getId());
+		assertEquals(2L, order2.getId());
 		assertTrue(order2.getTotalPrice().compareTo(new BigDecimal("3.00")) == 0);
 		assertEquals(2, order2.getItems().size());
 		

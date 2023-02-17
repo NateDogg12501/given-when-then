@@ -25,6 +25,11 @@ public abstract class GivenScenarioChain extends BaseChain {
 		return new ItemScenarios();
 	}
 	
+	public OrderScenarios existingOrder() {
+		closeCurrentChain();
+		return new OrderScenarios();
+	}
+	
 	protected abstract GivenScenarioChain closeCurrentChain();
 	
 }
