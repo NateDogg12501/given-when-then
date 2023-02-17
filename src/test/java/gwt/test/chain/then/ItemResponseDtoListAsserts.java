@@ -18,7 +18,7 @@ public class ItemResponseDtoListAsserts extends ThenAssertChain {
 	}
 	
 	public ItemResponseDtoListAsserts withListSize(int expectedSize) {
-		assertThat(responseItemList).as("ItemRespnseDtoListAsserts list size does not match").hasSize(expectedSize);
+		assertThat(responseItemList).as("ItemResponseDtoListAsserts list size does not match").hasSize(expectedSize);
 		return this;
 	}
 	

@@ -42,12 +42,13 @@ public class OrderControllerIntegrationTest extends BaseIntegrationTest {
 				.withDescription("Third Item")
 				.withPrice(new BigDecimal("3.00"))
 			.existingOrder()
-//				.withId(1L)
+				.withId(1L)
 				.withItemSkus(1L, 2L, 3L)
 			.existingOrder()
-//				.withId(2L)
+				.withId(2L)
 				.withItemSkus(1L, 2L)
-			.when();
+			.when()
+				.gettingAllOrders();
 		
 		
 		WebClient client = WebClient.create("http://localhost:" + port);

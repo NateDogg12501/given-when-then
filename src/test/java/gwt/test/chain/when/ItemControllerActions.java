@@ -9,32 +9,32 @@ import gwt.dto.response.ItemResponseDto;
 
 public abstract class ItemControllerActions extends WhenActionChain {
 		
-	private static final String ITEM_ENDPOINT = "/item";
-	private static final String ITEM_BY_SKU_ENDPOINT = ITEM_ENDPOINT + "/{sku}";
+	private static final String ITEMS_ENDPOINT = "/item";
+	private static final String ITEM_BY_SKU_ENDPOINT = ITEMS_ENDPOINT + "/{sku}";
 	
-	public static WhenGettingAllItemsChain whenGettingAllItemsChain() {
-		return new WhenGettingAllItemsChain();
+	public static WhenGettingAllItemsAction whenGettingAllItemsAction() {
+		return new WhenGettingAllItemsAction();
 	}
 	
-	public static class WhenGettingAllItemsChain extends WhenActionChain {
-		private WhenGettingAllItemsChain() { super(); }
+	public static class WhenGettingAllItemsAction extends WhenActionChain {
+		private WhenGettingAllItemsAction() { super(); }
 		
 		@Override
 		protected ResponseEntity<?> sendRequest() {
-			return client.get().uri(ITEM_ENDPOINT).retrieve().toEntityList(ItemResponseDto.class).block();
+			return client.get().uri(ITEMS_ENDPOINT).retrieve().toEntityList(ItemResponseDto.class).block();
 		}
 	}
 	
-	public static WhenGettingItemChain whenGettingItemChain() {
-		return new WhenGettingItemChain();
+	public static WhenGettingItemAction whenGettingItemAction() {
+		return new WhenGettingItemAction();
 	}
 	
-	public static class WhenGettingItemChain extends WhenActionChain {
-		private WhenGettingItemChain() { super(); } 
+	public static class WhenGettingItemAction extends WhenActionChain {
+		private WhenGettingItemAction() { super(); } 
 		
 		private Long sku;
 
-		public WhenGettingItemChain bySku(Long sku) {
+		public WhenGettingItemAction bySku(Long sku) {
 			this.sku = sku;
 			return this;
 		}
@@ -50,38 +50,38 @@ public abstract class ItemControllerActions extends WhenActionChain {
 		
 	}
 	
-	public static WhenCreatingItemChain whenCreatingItemChain() {
-		return new WhenCreatingItemChain();
+	public static WhenCreatingItemAction whenCreatingItemAction() {
+		return new WhenCreatingItemAction();
 	}
 	
-	public static class WhenCreatingItemChain extends WhenActionChain {
+	public static class WhenCreatingItemAction extends WhenActionChain {
 
 		private ItemRequestDto.ItemRequestDtoBuilder dtoBuilder;
 		
-		private WhenCreatingItemChain() {
+		private WhenCreatingItemAction() {
 			super();
 			
 			dtoBuilder = ItemRequestDto.builder();
 		}
 		
-		public WhenCreatingItemChain withSku(Long sku) {
+		public WhenCreatingItemAction withSku(Long sku) {
 			dtoBuilder.sku(sku);
 			return this;
 		}
 		
-		public WhenCreatingItemChain withDescription(String description) {
+		public WhenCreatingItemAction withDescription(String description) {
 			dtoBuilder.description(description);
 			return this;
 		}
 		
-		public WhenCreatingItemChain withPrice(BigDecimal price) {
+		public WhenCreatingItemAction withPrice(BigDecimal price) {
 			dtoBuilder.price(price);
 			return this;
 		}
 		
 		@Override
 		protected ResponseEntity<?> sendRequest() {
-			return client.post().uri(ITEM_ENDPOINT).bodyValue(dtoBuilder.build()).retrieve().toEntity(ItemResponseDto.class).block();
+			return client.post().uri(ITEMS_ENDPOINT).bodyValue(dtoBuilder.build()).retrieve().toEntity(ItemResponseDto.class).block();
 		}
 		
 		

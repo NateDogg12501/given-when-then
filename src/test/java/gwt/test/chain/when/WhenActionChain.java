@@ -32,21 +32,36 @@ public abstract class WhenActionChain extends BaseChain {
 		return new BasicThenAssert(applicationContext, response, webClientResponseException);
 	}
 	
-	public ItemControllerActions.WhenGettingAllItemsChain gettingAllItems() {
+	public ItemControllerActions.WhenGettingAllItemsAction gettingAllItems() {
 		closeCurrentChain();
-		return ItemControllerActions.whenGettingAllItemsChain();
+		return ItemControllerActions.whenGettingAllItemsAction();
 	}
 	
-	public ItemControllerActions.WhenGettingItemChain gettingItem() {
+	public ItemControllerActions.WhenGettingItemAction gettingItem() {
 		closeCurrentChain();
-		return ItemControllerActions.whenGettingItemChain();
+		return ItemControllerActions.whenGettingItemAction();
 	}
 	
-	public ItemControllerActions.WhenCreatingItemChain creatingItem() {
+	public ItemControllerActions.WhenCreatingItemAction creatingItem() {
 		closeCurrentChain();
-		return ItemControllerActions.whenCreatingItemChain();
+		return ItemControllerActions.whenCreatingItemAction();
 	}
 
+	public OrderControllerActions.WhenGettingAllOrdersAction gettingAllOrders() {
+		closeCurrentChain();
+		return OrderControllerActions.whenGettingAllOrdersAction();
+	}
+	
+	public OrderControllerActions.WhenGettingOrderAction gettingOrder() {
+		closeCurrentChain();
+		return OrderControllerActions.whenGettingOrderAction();
+	}
+	
+	public OrderControllerActions.WhenCreatingOrderAction creatingOrder() {
+		closeCurrentChain();
+		return OrderControllerActions.whenCreatingOrderAction();
+	}
+	
 	private WhenActionChain closeCurrentChain() {
 		try {
 			response = sendRequest();
