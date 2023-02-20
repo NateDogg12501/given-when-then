@@ -9,4 +9,8 @@ public class RepositoryAssertChain extends ThenAssertChain {
 	public ItemRepoAssertChain item() {
 		return new ItemRepoAssertChain();
 	}
+	
+	public OrderRepoAssertChain order() {
+		return new OrderRepoAssertChain();
+	}
 }

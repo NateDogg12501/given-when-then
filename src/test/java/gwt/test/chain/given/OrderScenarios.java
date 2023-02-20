@@ -1,14 +1,11 @@
 package gwt.test.chain.given;
 
-import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
-import javax.persistence.GeneratedValue;
-import javax.transaction.Transactional;
 
 import gwt.entity.Item;
 import gwt.entity.Order;
