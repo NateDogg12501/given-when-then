@@ -1,10 +1,11 @@
-package gwt.test.chain.then;
+package gwt.test.chain.then.response;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.math.BigDecimal;
 
 import gwt.dto.response.ItemResponseDto;
+import gwt.test.chain.then.ThenAssertChain;
 
 public class CreateItemAsserts extends ThenAssertChain {
 
