@@ -42,9 +42,10 @@ Testing framework to easily chain given-when-then test cases
         - [x] create item with duplicate sku
 - [ ] Integration Tests
 	- [x] Items
-	- [ ] Orders
+	- [x] Orders
 	- [x] Clean up messaging for assertEquals(...)
 	- [ ] Auto clean up repos/any resources given scenarios open should teardown themselves
+	- [ ] Think about what chains should close back to original (what options are presented when drilling down)
 - [ ] Smoke Tests  
 - [ ] Contract Tests      
     

@@ -6,29 +6,29 @@ import java.math.BigDecimal;
 
 import gwt.dto.response.ItemResponseDto;
 
-public class ItemResponseDtoAsserts extends ThenAssertChain {
+public class CreateItemAsserts extends ThenAssertChain {
 
 	private ItemResponseDto responseItem;
 	
-	public ItemResponseDtoAsserts() {
+	public CreateItemAsserts() {
 		super();
 		
 		responseItem = (ItemResponseDto) responseEntity.getBody();
 	}
 
-	public ItemResponseDtoAsserts hasSku(Long expectedSku) {
+	public CreateItemAsserts hasSku(Long expectedSku) {
 		assertThat(responseItem.getSku()).as("Item SKU does not match").isEqualTo(expectedSku);
 		return this;
 	}
 	
-	public ItemResponseDtoAsserts hasDescription(String expectedDescription) {
+	public CreateItemAsserts hasDescription(String expectedDescription) {
 		assertThat(responseItem.getDescription()).as("Item Description does not match").isEqualTo(expectedDescription);
 		return this;
 	}
 	
-	public ItemResponseDtoAsserts hasPrice(BigDecimal expectedPrice) {
+	public CreateItemAsserts hasPrice(BigDecimal expectedPrice) {
 		assertThat(responseItem.getPrice()).as("Item Price does not match").isEqualTo(expectedPrice);
 		return this;
 	}
-	
+
 }

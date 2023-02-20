@@ -13,6 +13,7 @@ public class ItemScenarios extends GivenScenarioChain {
 	
 	public ItemScenarios() {
 		super();
+		
 		itemRepo = this.getBean(ItemRepo.class);
 		itemBuilder = Item.builder();
 	}

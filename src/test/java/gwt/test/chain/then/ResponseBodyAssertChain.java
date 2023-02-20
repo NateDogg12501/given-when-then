@@ -6,12 +6,28 @@ public class ResponseBodyAssertChain extends ThenAssertChain {
 		super();
 	}
 	
-	public ItemResponseDtoListAsserts hasItemResponseDtoList() {
-		return new ItemResponseDtoListAsserts();
+	public GetAllItemsAsserts hasGetAllItemsResponseBody() {
+		return new GetAllItemsAsserts();
 	}
 	
-	public ItemResponseDtoAsserts hasItemResponseDto() {
-		return new ItemResponseDtoAsserts();
+	public GetItemBySkuAsserts hasGetItemBySkuResponseBody() {
+		return new GetItemBySkuAsserts();
+	}
+	
+	public CreateItemAsserts hasCreateItemResponseBody() {
+		return new CreateItemAsserts();
+	}
+	
+	public GetAllOrdersAsserts hasGetAllOrdersResponseBody() {
+		return new GetAllOrdersAsserts();
+	}
+	
+	public GetOrderAsserts hasGetOrderResponseBody() {
+		return new GetOrderAsserts();
+	}
+	
+	public CreateOrderAsserts hasCreateOrderResponseBody() {
+		return new CreateOrderAsserts();
 	}
 
 }
