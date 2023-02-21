@@ -1,8 +1,6 @@
 package gwt.test.chain.then.response.body;
 
 import gwt.test.chain.then.ThenAssertChain;
-import gwt.test.chain.then.response.CreateItemAsserts;
-import gwt.test.chain.then.response.CreateOrderAsserts;
 
 public class ResponseBodyAssertChain extends ThenAssertChain {
 

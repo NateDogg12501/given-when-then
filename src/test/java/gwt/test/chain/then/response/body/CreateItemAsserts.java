@@ -1,4 +1,4 @@
-package gwt.test.chain.then.response;
+package gwt.test.chain.then.response.body;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
