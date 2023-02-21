@@ -3,9 +3,9 @@
 ### Project Overview
 This project is an example framework for easy to write, easy to read, given-when-then tests.
 
-- Given => A scenario of the state of the application. For example, an item existing
-- When => An action under test. For example, calling an API endpoint
-- Then => An assertion for outcomes from the action, given the scenarios in place. For example, a new item being created.
+- `Given` - A scenario of the state of the application. For example, an item existing
+- `When` - An action under test. For example, calling an API endpoint
+- `Then` - An assertion for outcomes from the action, given the scenarios in place. For example, a new item being created.
 
 These together give us a test case. 
 
