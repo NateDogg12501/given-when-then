@@ -1,4 +1,4 @@
-package gwt.test.chain.then;
+package gwt.test.chain.then.response.body;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import gwt.dto.response.ItemResponseDto;
+import gwt.test.chain.then.ThenAssertChain;
 
 public class GetAllItemsAsserts extends ThenAssertChain {
 

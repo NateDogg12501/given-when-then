@@ -1,4 +1,4 @@
-package gwt.test.chain.then;
+package gwt.test.chain.then.repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import gwt.entity.Order;
 import gwt.repo.OrderRepo;
+import gwt.test.chain.then.ThenAssertChain;
 
 public class OrderRepoAssertChain extends ThenAssertChain {
 

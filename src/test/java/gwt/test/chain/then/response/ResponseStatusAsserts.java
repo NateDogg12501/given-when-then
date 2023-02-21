@@ -1,9 +1,11 @@
-package gwt.test.chain.then;
+package gwt.test.chain.then.response;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
+
+import gwt.test.chain.then.ThenAssertChain;
 
 public class ResponseStatusAsserts extends ThenAssertChain {
 	

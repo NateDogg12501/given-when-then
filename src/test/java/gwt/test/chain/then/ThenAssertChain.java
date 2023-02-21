@@ -4,6 +4,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.http.ResponseEntity;
 
 import gwt.test.chain.BaseChain;
+import gwt.test.chain.then.repository.RepositoryAssertChain;
+import gwt.test.chain.then.response.ResponseStatusAsserts;
+import gwt.test.chain.then.response.body.ResponseBodyAssertChain;
 
 public abstract class ThenAssertChain extends BaseChain {
 

@@ -1,4 +1,6 @@
-package gwt.test.chain.then;
+package gwt.test.chain.then.repository;
+
+import gwt.test.chain.then.ThenAssertChain;
 
 public class RepositoryAssertChain extends ThenAssertChain {
 
